@@ -47,7 +47,7 @@
                         data-numposts="5">
                     </div>
                 </div>
-                
+
                 <!-- Related News -->
                 <div class="related-news mt-5">
                     <h3 class="mb-4 border-bottom pb-2">सम्बन्धित खबर</h3>
@@ -80,6 +80,53 @@
 
 
             <?php endwhile; endif; ?>
+            <!-- Popular News Filter Section -->
+            <div class="popular-news mb-5">
+                <h3 class="mb-4 border-bottom pb-2">लोकप्रिय</h3>
+
+                <ul class="nav nav-pills mb-3" id="popular-tabs">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-range="all">लोकप्रिय</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-range="24">२४ घण्टा</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-range="week">यो साता</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-range="month">यो महिना</button>
+                    </li>
+                </ul>
+
+                <div id="popular-news-list" class="row">
+                    <?php
+                    $popular_default = new WP_Query([
+                        'posts_per_page' => 6,
+                        'meta_key'       => 'post_views_count',
+                        'orderby'        => 'meta_value_num',
+                        'order'          => 'DESC'
+                    ]);
+
+                    if ($popular_default->have_posts()) :
+                        while ($popular_default->have_posts()) : $popular_default->the_post(); ?>
+                            <div class="col-md-4 mb-3">
+                                <a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark">
+                                    <?php if (has_post_thumbnail()) : ?>
+                                        <?php the_post_thumbnail('medium', ['class' => 'img-fluid mb-2']); ?>
+                                    <?php endif; ?>
+                                    <h6><?php the_title(); ?></h6>
+                                </a>
+                            </div>
+                        <?php endwhile;
+                        wp_reset_postdata();
+                    else :
+                        echo '<p>समाचार फेला परेन।</p>';
+                    endif;
+                    ?>
+                </div>
+            </div>
+
         </div>
 
         <!-- Sidebar (4 columns) -->
@@ -111,5 +158,79 @@
 <style>
     .text-justify {
     text-align: justify;
+
+    /* Popular Tabs Styling */
+#popular-tabs .nav-link {
+    cursor: pointer;
+    color: #555;
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 10px;
+    border-radius: 0;
+}
+
+#popular-tabs .nav-link.active {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+/* Headline section */
+.popular-news h3 {
+    font-size: 2em;
+    font-weight: 700;
+    color: #222;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 8px;
+}
+
+/* News items */
+#popular-news-list h6 {
+    font-size: 1.5em;
+    line-height: 1.4;
+    color: #333;
+    margin: 0;
+}
+
+#popular-news-list a:hover h6 {
+    color: #0d6efd;
+    text-decoration: underline;
+}
+
+/* Thumbnail image (optional enhancement) */
+#popular-news-list img {
+    border-radius: 4px;
+    transition: transform 0.2s ease;
+}
+#popular-news-list img:hover {
+    transform: scale(1.03);
+}
+
 }
 </style>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const tabs = document.querySelectorAll('#popular-tabs button');
+    const container = document.getElementById('popular-news-list');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function () {
+            tabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+
+            const range = this.getAttribute('data-range');
+            container.innerHTML = '<p>Loading...</p>';
+
+            fetch('<?php echo admin_url("admin-ajax.php"); ?>?action=get_popular_news&range=' + range)
+                .then(response => response.text())
+                .then(html => {
+                    container.innerHTML = html;
+                })
+                .catch(err => {
+                    container.innerHTML = '<p>Error loading news.</p>';
+                });
+        });
+    });
+});
+</script>
+
+

@@ -705,3 +705,77 @@ class Trending_News_This_Month_Widget extends WP_Widget {
         ";
     }
 }
+// ==========================
+// Track Post Views
+// ==========================
+// Function to set post views count
+// Track post views
+function set_post_views($postID) {
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if ($count == '') {
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '1');
+    } else {
+        $count++;
+        update_post_meta($postID, $count_key, $count);
+    }
+}
+function track_post_views($post_id) {
+    if (!is_single()) return;
+    if (empty($post_id)) {
+        global $post;
+        $post_id = $post->ID;
+    }
+    set_post_views($post_id);
+}
+add_action('wp_head', 'track_post_views');
+
+// AJAX handler
+add_action('wp_ajax_get_popular_news', 'get_popular_news_ajax');
+add_action('wp_ajax_nopriv_get_popular_news', 'get_popular_news_ajax');
+
+function get_popular_news_ajax() {
+    $range = sanitize_text_field($_GET['range'] ?? 'all');
+
+    $args = [
+        'posts_per_page' => 6,
+        'meta_key'       => 'post_views_count',
+        'orderby'        => 'meta_value_num',
+        'order'          => 'DESC',
+        'post_status'    => 'publish'
+    ];
+
+    switch ($range) {
+        case '24':
+            $args['date_query'] = [['after' => '1 day ago']];
+            break;
+        case 'week':
+            $args['date_query'] = [['after' => '7 days ago']];
+            break;
+        case 'month':
+            $args['date_query'] = [['after' => '30 days ago']];
+            break;
+    }
+
+    $popular = new WP_Query($args);
+
+    if ($popular->have_posts()) :
+        while ($popular->have_posts()) : $popular->the_post(); ?>
+            <div class="col-md-4 mb-3">
+                <a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark">
+                    <?php if (has_post_thumbnail()) : ?>
+                        <?php the_post_thumbnail('medium', ['class' => 'img-fluid mb-2']); ?>
+                    <?php endif; ?>
+                    <h6><?php the_title(); ?></h6>
+                </a>
+            </div>
+        <?php endwhile;
+        wp_reset_postdata();
+    else :
+        echo '<p>समाचार फेला परेन।</p>';
+    endif;
+
+    wp_die();
+}
+
