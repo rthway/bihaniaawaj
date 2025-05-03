@@ -195,3 +195,6 @@
 
 </header>
 
+<?php get_template_part('welcome-advertisement'); ?>
+
+

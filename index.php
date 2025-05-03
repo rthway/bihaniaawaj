@@ -59,6 +59,23 @@ endif;
 
 <hr>
 
+
+<!-- Main Content Section - first content block-->
+<div class="row my-4">
+        <div class="col-lg-8">
+            <!-- Get and display the first content block -->
+            <?php get_template_part('template-parts/category-blog'); ?>
+        </div>
+        
+        <div class="col-lg-4">
+            <?php if (is_active_sidebar('sidebar-ad-1')) : ?>
+                <!-- Display the sidebar ad if it's active -->
+                <?php dynamic_sidebar('sidebar-ad-1'); ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</main>
+
 <?php
 get_template_part('template-parts/category-politics'); 
 ?>
@@ -100,20 +117,4 @@ get_template_part('template-parts/category-interview');
 
 
 
-
-<!-- Main Content Section - first content block-->
-<div class="row my-4">
-        <div class="col-lg-8">
-            <!-- Get and display the first content block -->
-            <?php get_template_part('category-rajniti-block'); ?>
-        </div>
-        
-        <div class="col-lg-4">
-            <?php if (is_active_sidebar('sidebar-ad-1')) : ?>
-                <!-- Display the sidebar ad if it's active -->
-                <?php dynamic_sidebar('sidebar-ad-1'); ?>
-            <?php endif; ?>
-        </div>
-    </div>
-</main>
 <?php get_footer(); ?>

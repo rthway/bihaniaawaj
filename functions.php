@@ -327,3 +327,371 @@ function compress_uploaded_image($file) {
     return $file;
 }
 add_filter('wp_handle_upload_prefilter', 'compress_uploaded_image');
+
+// ==========================
+// Create Custom Video Post Type
+// ==========================
+function create_video_post_type() {
+    register_post_type('video',
+        array(
+            'labels' => array(
+                'name' => __('Videos'),
+                'singular_name' => __('Video')
+            ),
+            'public' => true,
+            'has_archive' => true,
+            'supports' => array('title', 'editor', 'thumbnail'),
+            'rewrite' => array('slug' => 'videos'),
+            'menu_icon' => 'dashicons-video-alt2',
+        )
+    );
+}
+add_action('init', 'create_video_post_type');
+
+// ==========================
+// Create wiget areas for ads and footer
+// ==========================
+
+function bihani_widgets_init() {
+
+    // Sidebar Ad 1
+    register_sidebar( array(
+        'name'          => 'Sidebar Ad 1',
+        'id'            => 'sidebar-ad-1',
+        'before_widget' => '<div class="sidebar-ad-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+
+    // Sidebar Ad 2
+    register_sidebar( array(
+        'name'          => 'Sidebar Ad 2',
+        'id'            => 'sidebar-ad-2',
+        'before_widget' => '<div class="sidebar-ad-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+
+    // Sidebar Ad 3
+    register_sidebar( array(
+        'name'          => 'Sidebar Ad 3',
+        'id'            => 'sidebar-ad-3',
+        'before_widget' => '<div class="sidebar-ad-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+
+    // Sidebar Ad 4
+    register_sidebar( array(
+        'name'          => 'Sidebar Ad 4',
+        'id'            => 'sidebar-ad-4',
+        'before_widget' => '<div class="sidebar-ad-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+    // Sidebar Ad 5
+    register_sidebar( array(
+        'name'          => 'Sidebar Ad 5',
+        'id'            => 'sidebar-ad-5',
+        'before_widget' => '<div class="sidebar-ad-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+
+    // After Block Ad 1
+    register_sidebar( array(
+        'name'          => 'After Block Ad 1',
+        'id'            => 'after-block-ad-1',
+        'before_widget' => '<div class="after-block-ad-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+
+    // After Block Ad 2
+    register_sidebar( array(
+        'name'          => 'After Block Ad 2',
+        'id'            => 'after-block-ad-2',
+        'before_widget' => '<div class="after-block-ad-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+
+    // After Block Ad 3
+    register_sidebar( array(
+        'name'          => 'After Block Ad 3',
+        'id'            => 'after-block-ad-3',
+        'before_widget' => '<div class="after-block-ad-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+    // After Block Ad 4
+    register_sidebar( array(
+        'name'          => 'After Block Ad 4',
+        'id'            => 'after-block-ad-4',
+        'before_widget' => '<div class="after-block-ad-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+    // After Block Ad 5
+    register_sidebar( array(
+        'name'          => 'After Block Ad 5',
+        'id'            => 'after-block-ad-5',
+        'before_widget' => '<div class="after-block-ad-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+    // After Block Ad 6
+    register_sidebar( array(
+        'name'          => 'After Block Ad 6',
+        'id'            => 'after-block-ad-6',
+        'before_widget' => '<div class="after-block-ad-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+    // After Block Ad 7
+    register_sidebar( array(
+        'name'          => 'After Block Ad 7',
+        'id'            => 'after-block-ad-7',
+        'before_widget' => '<div class="after-block-ad-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+
+    // footer part
+    register_sidebar( array(
+        'name'          => 'Footer Column 1',
+        'id'            => 'footer-column-1',
+        'before_widget' => '<div class="footer-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4>',
+        'after_title'   => '</h4>',
+    ) );
+    register_sidebar( array(
+        'name'          => 'Footer Column 2',
+        'id'            => 'footer-column-2',
+        'before_widget' => '<div class="footer-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4>',
+        'after_title'   => '</h4>',
+    ) );
+    register_sidebar( array(
+        'name'          => 'Footer Column 3',
+        'id'            => 'footer-column-3',
+        'before_widget' => '<div class="footer-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4>',
+        'after_title'   => '</h4>',
+    ) );
+
+}
+add_action('widgets_init', 'bihani_widgets_init');
+
+// ==========================
+// Welcome Screen Advertisement Customizer
+// ==========================
+function welcome_advertisement_customize_register($wp_customize) {
+    // Section
+    $wp_customize->add_section('welcome_advertisement_section', array(
+        'title'       => __('Welcome Screen Advertisement', 'textdomain'),
+        'description' => __('Settings for the Welcome Screen Advertisement', 'textdomain'),
+        'priority'    => 160,
+    ));
+
+    // Enable Advertisement Toggle
+    $wp_customize->add_setting('enable_advertisement', array(
+        'default' => false,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+    $wp_customize->add_control('enable_advertisement', array(
+        'type'     => 'checkbox',
+        'section'  => 'welcome_advertisement_section',
+        'label'    => __('Enable Advertisement', 'textdomain'),
+    ));
+
+    // Advertisement Design Layout
+    $wp_customize->add_setting('advertisement_layout', array(
+        'default' => 'default',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('advertisement_layout', array(
+        'type'    => 'select',
+        'section' => 'welcome_advertisement_section',
+        'label'   => __('Advertisement Design Layout', 'textdomain'),
+        'choices' => array(
+            'default' => __('Default', 'textdomain'),
+            'custom'  => __('Custom', 'textdomain'),
+        ),
+    ));
+
+    // Welcome Message
+    $wp_customize->add_setting('advertisement_message', array(
+        'default'           => __('Welcome Advertisement Message', 'textdomain'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('advertisement_message', array(
+        'type'    => 'text',
+        'section' => 'welcome_advertisement_section',
+        'label'   => __('Welcome Advertisement Message', 'textdomain'),
+    ));
+
+    // Advertisement Image
+    $wp_customize->add_setting('advertisement_image', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'advertisement_image', array(
+        'label'    => __('Upload Advertisement Image', 'textdomain'),
+        'section'  => 'welcome_advertisement_section',
+    )));
+
+    // Advertisement Link
+    $wp_customize->add_setting('advertisement_link', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('advertisement_link', array(
+        'type'        => 'url',
+        'section'     => 'welcome_advertisement_section',
+        'label'       => __('Advertisement Link', 'textdomain'),
+        'description' => __('Leave empty if you don\'t want the image to have a link.', 'textdomain'),
+    ));
+}
+add_action('customize_register', 'welcome_advertisement_customize_register');
+
+
+
+
+// ==========================
+// tranding news widget
+// ==========================
+// Register the Trending News Widget
+function register_trending_news_widget() {
+    register_widget('Trending_News_This_Month_Widget');
+}
+add_action('widgets_init', 'register_trending_news_widget');
+
+// Define the Widget Class
+class Trending_News_This_Month_Widget extends WP_Widget {
+
+    public function __construct() {
+        parent::__construct(
+            'trending_news_this_month_widget',
+            __('Trending News This Month', 'textdomain'),
+            array('description' => __('Display most viewed posts this month.', 'textdomain'))
+        );
+        add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
+    }
+
+    public function enqueue_styles() {
+        wp_register_style('trending-widget-style', false);
+        wp_enqueue_style('trending-widget-style');
+        wp_add_inline_style('trending-widget-style', $this->get_styles());
+    }
+
+    public function widget($args, $instance) {
+        echo $args['before_widget'];
+        ?>
+        <div class="trending-widget">
+            <div class="trending-title">ट्रेन्डिङ:</div>
+            <hr>
+            <?php
+            $query = new WP_Query(array(
+                'posts_per_page' => 10,
+                'meta_key' => 'post_views_count',
+                'orderby' => 'meta_value_num',
+                'order' => 'DESC',
+                'date_query' => array(array(
+                    'after' => 'first day of this month',
+                    'before' => 'last day of this month',
+                    'inclusive' => true,
+                )),
+            ));
+
+            $counter = 1;
+            if ($query->have_posts()) :
+                while ($query->have_posts()) : $query->the_post(); ?>
+                    <div class="trending-item">
+                        <div class="trending-number"><?php echo $counter++; ?></div>
+                        <div class="trending-text">
+                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                        </div>
+                    </div>
+                    <hr>
+                <?php endwhile;
+                wp_reset_postdata();
+            else :
+                echo '<p>हाल ट्रेन्डिङ समाचार छैन।</p>';
+            endif;
+            ?>
+        </div>
+        <?php
+        echo $args['after_widget'];
+    }
+
+    public function form($instance) {
+        echo '<p>' . __('No settings for this widget.', 'textdomain') . '</p>';
+    }
+
+    private function get_styles() {
+        return "
+        .trending-widget {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Muktinath', sans-serif;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .trending-title {
+            color: #d90429;
+            font-weight: bold;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .trending-title::before {
+            content: '📈';
+            margin-right: 8px;
+        }
+        .trending-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            color: #333;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+        .trending-number {
+            background: #c1121f;
+            color: #fff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            font-size: 14px;
+            margin-right: 10px;
+            font-weight: bold;
+            line-height: 24px;
+        }
+        .trending-text a {
+            text-decoration: none;
+            color: #333;
+        }
+        .trending-text a:hover {
+            color: #d90429;
+        }
+        ";
+    }
+}
