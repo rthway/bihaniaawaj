@@ -133,7 +133,7 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg custom-navbar">
+    <nav class="navbar navbar-expand-lg custom-navbar sticky-navbar">
         <div class="container">
             <!-- Site Brand/Logo -->
             <a class="navbar-brand text-white" href="<?php echo home_url(); ?>">
@@ -204,3 +204,17 @@
 <?php get_template_part('welcome-advertisement'); ?>
 
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const navbar = document.querySelector('.sticky-navbar');
+    const offset = 200; // adjust this value as needed
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > offset) {
+            navbar.classList.add('fixed');
+        } else {
+            navbar.classList.remove('fixed');
+        }
+    });
+});
+</script>

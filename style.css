@@ -173,6 +173,23 @@ Responsive Adjustments for Navbar
 
 }
 
+/* 
+========================================================
+sticky-navbar 
+========================================================
+*/
+
+.sticky-navbar {
+    transition: all 0.3s ease-in-out;
+    z-index: 999;
+}
+
+.sticky-navbar.fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
 
 
 /* 

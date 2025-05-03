@@ -102,5 +102,5 @@ get_template_part('template-parts/category-interview');
 ?>
 
 
-
+</main>
 <?php get_footer(); ?>
