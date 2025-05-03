@@ -1,6 +1,6 @@
 <style>
 .video-section-wrapper {
-    padding-inline: 16%; /* 15% left and right space */
+    padding-inline: 1%; /* 15% left and right space */
     background-color: #f8f9fa;
 }
 
