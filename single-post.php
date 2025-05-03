@@ -9,7 +9,7 @@
             <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
                 <!-- Post Heading -->
-                <h1 class="mb-3"><?php the_title(); ?></h1>
+                <h1 class="mb-3 custom-heading"><?php the_title(); ?></h1>
                 
 
                 <!-- Author, Date & Text Size -->
@@ -173,6 +173,7 @@
 <style>
     .text-justify {
     text-align: justify;
+    }
 
     /* Popular Tabs Styling */
 #popular-tabs .nav-link {
@@ -219,9 +220,12 @@
 #popular-news-list img:hover {
     transform: scale(1.03);
 }
-
-
+.custom-heading {
+    color:rgb(37, 44, 51); /* Replace with the desired color */
+    font-size: 4em; /* Replace with the desired font size */
 }
+
+
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
