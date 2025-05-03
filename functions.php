@@ -354,6 +354,16 @@ add_action('init', 'create_video_post_type');
 
 function bihani_widgets_init() {
 
+    register_sidebar(array(
+        'name'          => __('Main Sidebar', 'bihani'),
+        'id'            => 'main-sidebar',
+        'description'   => __('Widgets in this area will be shown on the main sidebar.', 'bihani'),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
+    ));
+
     // Sidebar Ad 1
     register_sidebar( array(
         'name'          => 'Sidebar Ad 1',

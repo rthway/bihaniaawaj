@@ -37,6 +37,17 @@
                     <?php the_content(); ?>
                 </div>
 
+                <!-- Comments Section -->
+                <div class="comments-section mt-5">
+                    <h3 class="mb-4 border-bottom pb-2">टिप्पणी गर्नुहोस्</h3>
+                   
+                    <div class="fb-comments" 
+                        data-href="<?php the_permalink(); ?>" 
+                        data-width="100%" 
+                        data-numposts="5">
+                    </div>
+                </div>
+                
                 <!-- Related News -->
                 <div class="related-news mt-5">
                     <h3 class="mb-4 border-bottom pb-2">सम्बन्धित खबर</h3>
@@ -65,20 +76,22 @@
                         <?php endif; ?>
                     </div>
                 </div>
+                
+
 
             <?php endwhile; endif; ?>
         </div>
 
         <!-- Sidebar (4 columns) -->
-<div class="col-lg-4">
-    <?php if ( is_active_sidebar( 'main_sidebar' ) ) : ?>
-        <div id="sidebar" class="widget-area">
-            <?php dynamic_sidebar( 'main_sidebar' ); ?>
+        <div class="col-lg-4">
+            <?php if ( is_active_sidebar( 'sidebar-ad-1' ) ) : ?>
+                <div id="sidebar" class="widget-area">
+                    <?php dynamic_sidebar( 'sidebar-ad-1' ); ?>
+                </div>
+            <?php else : ?>
+                <p>No widgets found. Please add widgets from the WordPress admin panel.</p>
+            <?php endif; ?>
         </div>
-    <?php else : ?>
-        <p>No widgets found. Please add widgets from the WordPress admin panel.</p>
-    <?php endif; ?>
-</div>
 
 
     </div>
