@@ -779,3 +779,38 @@ function get_popular_news_ajax() {
     wp_die();
 }
 
+
+
+// ==========================
+// Calculate Reading Time
+// ==========================
+
+function reading_time() {
+    $content = get_post_field('post_content', get_the_ID());
+    $word_count = str_word_count(strip_tags($content));
+    $reading_time = ceil($word_count / 200); // average 200 words per minute
+    return $reading_time;
+}
+
+
+// ==========================
+// plugin requirement
+// ==========================
+// Include the TGM Plugin Activation file
+require_once get_template_directory() . '/inc/admin/plugin-requirement.php';
+
+// Enqueue custom styles for the admin area
+function bihani_admin_styles() {
+    wp_enqueue_style('bihani-admin-styles', get_template_directory_uri() . '/inc/admin/admin-style.css');
+}
+add_action('admin_enqueue_scripts', 'bihani_admin_styles');
+
+// Add custom dashboard widgets
+function bihani_custom_dashboard_widgets() {
+    wp_add_dashboard_widget(
+        'bihani_welcome_widget', // Widget ID
+        'Welcome to bihani', // Widget Title
+        'bihani_welcome_widget_content' // Callback function for widget content
+    );
+}
+add_action('wp_dashboard_setup', 'bihani_custom_dashboard_widgets');

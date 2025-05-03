@@ -4,18 +4,21 @@
     <div class="row">
 
         <!-- Main Content (8 columns) -->
-        <div class="col-lg-8">
+        <div class="col-lg-8 pe-lg-5" >
 
             <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
                 <!-- Post Heading -->
                 <h1 class="mb-3"><?php the_title(); ?></h1>
+                
 
                 <!-- Author, Date & Text Size -->
                 <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
                     <div class="text-muted">
-                        <i class="fa fa-user-circle"></i>
-                        <?php the_author(); ?> | <i class="fa fa-clock-o"></i><?php echo get_the_date(); ?>
+                    <?php echo get_avatar(get_the_author_meta('ID'), 64, '', '', ['class' => 'rounded-circle me-3']); ?>
+
+                    <?php the_author(); ?> | <i class="fa fa-clock-o"></i><?php echo get_the_date(); ?> 
+
                     </div>
                     <div class="text-size-options">
                         <span class="me-2">Text Size:</span>
@@ -24,6 +27,14 @@
                         <button class="btn btn-sm btn-light" onclick="changeTextSize('large')">L</button>
                     </div>
                 </div>
+                <!-- Reading Time -->
+                <div>
+                    <strong style="color:rgb(11, 67, 116); font-size: 1.5em; font-weight: 600;">
+                        पढ्न लाग्ने समय : <?php echo reading_time(); ?> मिनेट
+                    </strong>
+                </div>
+                <br>
+
 
                 <!-- Thumbnail -->
                 <?php if (has_post_thumbnail()) : ?>
@@ -31,12 +42,16 @@
                         <?php the_post_thumbnail('large', ['class' => 'img-fluid']); ?>
                     </div>
                 <?php endif; ?>
+                <?php echo sharethis_inline_buttons(); ?>
+                <br>
 
                 <!-- Post Content -->
                 <div id="post-content" class="post-content mb-5 text-justify">
                     <?php the_content(); ?>
                 </div>
-
+                <?php echo sharethis_inline_buttons(); ?>
+                <br>
+                
                 <!-- Comments Section -->
                 <div class="comments-section mt-5">
                     <h3 class="mb-4 border-bottom pb-2">टिप्पणी गर्नुहोस्</h3>
@@ -131,12 +146,12 @@
 
         <!-- Sidebar (4 columns) -->
         <div class="col-lg-4">
-            <?php if ( is_active_sidebar( 'sidebar-ad-1' ) ) : ?>
+            <?php if ( is_active_sidebar( 'main-sidebar' ) ) : ?>
                 <div id="sidebar" class="widget-area">
-                    <?php dynamic_sidebar( 'sidebar-ad-1' ); ?>
+                    <?php dynamic_sidebar( 'main-sidebar' ); ?>
                 </div>
             <?php else : ?>
-                <p>No widgets found. Please add widgets from the WordPress admin panel.</p>
+                <p>No widgets found. </p>
             <?php endif; ?>
         </div>
 
@@ -204,6 +219,7 @@
 #popular-news-list img:hover {
     transform: scale(1.03);
 }
+
 
 }
 </style>

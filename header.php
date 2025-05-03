@@ -87,14 +87,13 @@
         <div class="row">
             <div class="col-md-6">
             <?php
-             // Check if the Nepali Date Converter plugin is active and the shortcode exists
-                if (is_plugin_active('nepali-date-converter/ndc.php') && shortcode_exists('ndc-today-date')) {
-                // If active and the shortcode exists, echo the Nepali date using the shortcode
-                echo do_shortcode('[ndc-today-date disable_today_eng_date="1" title=""]');
-                } else {
-                // If not active or shortcode does not exist, fall back to the default WordPress date
-                echo date('l, F j, Y');
-                }
+            
+             if (shortcode_exists('ndc-today-date')) {
+                 echo do_shortcode('[ndc-today-date disable_today_eng_date="1" title=""]');
+             } else {
+                 echo date('l, F j, Y');
+             }
+            
             ?>
             </div>
             <div class="col-md-6 text-end">
