@@ -786,11 +786,22 @@ function get_popular_news_ajax() {
 // ==========================
 
 function reading_time() {
-    $content = get_post_field('post_content', get_the_ID());
+    $post_id = get_queried_object_id(); // Safer than get_the_ID()
+    $content = get_post_field('post_content', $post_id);
+
+    if (empty($content)) {
+        return 0; // or return 'N/A';
+    }
+
     $word_count = str_word_count(strip_tags($content));
-    $reading_time = ceil($word_count / 200); // average 200 words per minute
+    if ($word_count === 0) {
+        $word_count = preg_match_all('/\pL+/u', strip_tags($content), $matches);
+    }
+
+    $reading_time = ceil($word_count / 200);
     return $reading_time;
 }
+
 
 
 // ==========================
@@ -814,3 +825,25 @@ function bihani_custom_dashboard_widgets() {
     );
 }
 add_action('wp_dashboard_setup', 'bihani_custom_dashboard_widgets');
+
+//===========================
+// Callback function for the widget content
+//===========================
+
+// Include the widget file
+require_once get_template_directory() . '/widgets/latest-news-widget.php';
+
+// Register the widget
+function register_latest_news_widget() {
+    register_widget('Latest_News_Widget');
+}
+add_action('widgets_init', 'register_latest_news_widget');
+
+
+// Include the popular posts widget
+require_once get_template_directory() . '/widgets/popular-posts-widget.php';
+
+function register_popular_posts_widget() {
+    register_widget('Popular_Posts_Widget');
+}
+add_action('widgets_init', 'register_popular_posts_widget');

@@ -25,6 +25,7 @@ $category_link = get_category_link($category->term_id);
       ]);
       if ($featured->have_posts()) :
         while ($featured->have_posts()) : $featured->the_post(); ?>
+         <a href="<?php the_permalink(); ?>" class="text-decoration-none text-white">
           <div class="position-relative text-white">
             <?php if (has_post_thumbnail()) : ?>
               <img src="<?php the_post_thumbnail_url('large'); ?>" class="img-fluid w-100 economic-featured-img" alt="<?php the_title(); ?>">
@@ -34,6 +35,7 @@ $category_link = get_category_link($category->term_id);
               <small><i class="bi bi-clock"></i> <?php echo human_time_diff(get_the_time('U'), current_time('timestamp')) . ' अघि'; ?></small>
             </div>
           </div>
+        </a>
       <?php endwhile; wp_reset_postdata(); endif; ?>
     </div>
 

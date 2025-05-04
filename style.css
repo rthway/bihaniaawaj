@@ -309,6 +309,39 @@ Economy Section Styles
 
 /*
 ======================================================= 
-Pagination Styles
+latest-news-widget styles
 =======================================================
 */
+.latest-news-widget {
+    list-style: none;
+    padding-left: 0;
+}
+.latest-news-widget li {
+    margin-bottom: 10px;
+}
+.latest-news-widget li a {
+    text-decoration: none;
+    color: #333;
+}
+.latest-news-widget li a:hover {
+    color: #007bff;
+}
+/*
+======================================================= 
+populor-news-widget styles
+=======================================================
+*/
+.popular-posts-widget {
+    list-style: none;
+    padding-left: 0;
+}
+.popular-posts-widget li {
+    margin-bottom: 10px;
+}
+.popular-posts-widget li a {
+    color: #444;
+    text-decoration: none;
+}
+.popular-posts-widget li a:hover {
+    color: #e60000;
+}
