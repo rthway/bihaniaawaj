@@ -312,20 +312,37 @@ Economy Section Styles
 latest-news-widget styles
 =======================================================
 */
-.latest-news-widget {
-    list-style: none;
-    padding-left: 0;
-}
-.latest-news-widget li {
+.latest-news-widget .post-item {
     margin-bottom: 10px;
-}
-.latest-news-widget li a {
-    text-decoration: none;
-    color: #333;
-}
-.latest-news-widget li a:hover {
+  }
+  
+  .latest-news-widget .number {
+    font-weight: bold;
     color: #007bff;
-}
+    margin-right: 5px;
+    font-size: 1.5em;
+    font-family: fantasy;
+  }
+  
+  .latest-news-widget .title {
+    font-size: 1.5em;
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .latest-news-widget .title:hover {
+    text-decoration: none;
+  }
+  
+  .latest-news-widget hr {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 0;
+    height: 1px;
+    background-color: #ccc;
+  }
+  
+  
 /*
 ======================================================= 
 populor-news-widget styles

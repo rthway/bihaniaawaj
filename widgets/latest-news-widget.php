@@ -11,24 +11,30 @@ class Latest_News_Widget extends WP_Widget {
     public function widget($args, $instance) {
         $title = apply_filters('widget_title', $instance['title'] ?? __('ताजा खबर', 'textdomain'));
         $count = !empty($instance['count']) ? absint($instance['count']) : 5;
-
+    
         echo $args['before_widget'];
         if (!empty($title)) {
             echo $args['before_title'] . esc_html($title) . $args['after_title'];
         }
-
+    
         $latest_query = new WP_Query(array(
             'posts_per_page' => $count,
             'post_status'    => 'publish',
             'ignore_sticky_posts' => 1
         ));
-
-        echo '<ul class="latest-news-widget">';
+    
+        echo '<div class="latest-news-widget">';
+        $i = 1;
         while ($latest_query->have_posts()) : $latest_query->the_post();
-            echo '<li><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></li>';
+            echo '<div class="post-item">';
+            echo '<span class="number">' . esc_html(convert_to_nepali_number($i)) . '.</span> ';
+            echo '<a class="title" href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a>';
+            echo '<hr>';
+            echo '</div>';
+            $i++;
         endwhile;
-        echo '</ul>';
-
+        echo '</div>';
+    
         wp_reset_postdata();
         echo $args['after_widget'];
     }
@@ -38,7 +44,8 @@ class Latest_News_Widget extends WP_Widget {
         $count = $instance['count'] ?? 5;
         ?>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php esc_html_e('Title:', 'textdomain'); ?></label>
+            <b><label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php esc_html_e('Title:', 'textdomain'); ?></label></b>
+            <hr>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"
                 value="<?php echo esc_attr($title); ?>">
